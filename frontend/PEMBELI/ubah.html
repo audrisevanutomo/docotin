@@ -39,7 +39,7 @@
 			  <!-- Collect the nav links, forms, and other content for toggling -->
 			  
 				<ul class="nav navbar-nav navbar-right">
-				  <li><a href="#">Logout</a></li>
+				  <li><a href="index1.html" href="#">Logout</a></li>
 				  
 				</ul>
 			  </div><!-- /.navbar-collapse -->
@@ -65,17 +65,32 @@
         <h4 class="modal-title centered" id="myModalLabel"><strong>Pilih Pembayaran</strong></h4>
       </div>
       <div class="modal-body">
-        <div class="radio"><td width="200px"><label><input type="radio" name="optradio" checked>Cash</label></td>
-        <br><br>
-        <div class="saldo_docotin">
-          <label><input type="radio" name="optradio" checked>Saldo Docotin</label>
-          <span class= "sukses"><p>Saldo Anda Rp. 70.000</p></span>
+          <tbody>
+              <tr class="success">
+                <div class="radio">
+                  <td width="200px"><label><input type="radio" name="optradio" value="cash" checked>Cash</label></td>
+                  <td width="200px"><label><input type="radio" name="optradio" value="saldo" >Saldo Docotin</label></td>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+          <div class="radio-saldo">          
+            <div class="alert alert-danger">
+            <strong>Saldo Anda Rp. 70.000</strong>
+            </div>
+            <div class="modal-footer">
+              <a href="list_pemesanan.html"><button type="button" class="btn btn-primary">Lanjutkan</button></a> 
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <div class="radio-cash">
+            <div class="modal-footer">
+              <a href="list_pemesanan.html"><button type="button" class="btn btn-primary">Lanjutkan</button></a> 
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
         </div>
-      </div>
-      <div class="modal-footer">
-      <a href="list_pemesanan.html"><button type="button" class="btn btn-primary">Lanjutkan</button></a> 
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -124,7 +139,7 @@
         <div class="col-md-5">
           <div class="panel-total">
           <div class="panel">
-            <div class="panel-heading">Total Belanja Kamu</div>
+            <div class="panel-header">Total Belanja Kamu</div>
             <p>Mie Indomie Saus Eropa</p>
             <p>Rp 10.000 x 3 = Rp 30.000</p>
             <p>Mie Indomie Saus Afrika</p>
@@ -151,6 +166,23 @@
     
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="../scripts/main.js"></script>  
+  <script src="../scripts/main.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.radio-saldo').hide()					
+
+    $('input[name=optradio]').on('change', function() {
+      values=$('input[name=optradio]:checked').val()
+      if(values == "cash"){
+        $('.radio-cash').show()
+        $('.radio-saldo').hide()					
+      } else {
+        $('.radio-cash').hide()
+        $('.radio-saldo').show()
+      }
+    });
+      
+  });
+  </script>
 
 </body></html>
