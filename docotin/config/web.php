@@ -11,7 +11,35 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'pembeli' => [
+            'class' => 'app\modules\pembeli\Module',
+        ],
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+        'penjual' => [
+            'class' => 'app\modules\penjual\Module',
+        ],
+    ],
+    // 'modules' => [
+    //     'admin' => [
+    //         'class' => 'app\modules\admin\Module',
+    //     ],
+    // ],
     'components' => [
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
+            'showScriptName' => false,
+            // Disable r= routes
+            'enablePrettyUrl' => true,
+            'rules' => array(
+                    '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                    '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ),
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'aXsdnzrG9oTt8JQG9NV8GHX_qk6HuNvp',

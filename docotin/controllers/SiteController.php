@@ -129,4 +129,8 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+     public function actionKeranjang()
+    {
+        return $this->render('keranjang');
+    }
 }
