@@ -50,7 +50,7 @@
 			<ul>
 				<a href="/admin/flagging/flagging"><li data-target="flagging">Flagging</li></a>
 				<a href="/admin/transaksi/list-transaksi"><li data-target="list_pesanan">List Pesanan</li></a>
-				<a href="/admin/other/list-user"><li data-target="history_transaksi">User</li></a>
+				<a href="/admin/other/index"><li data-target="history_transaksi">User</li></a>
 				<a href="/admin/flagging/list-va"><li data-target="user">List VA</li></a>
 			</ul>
 		</div>

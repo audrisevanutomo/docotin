@@ -5,15 +5,16 @@ namespace app\modules\penjual\controllers;
 use yii\web\Controller;
 
 /**
- * Default controller for the `admin` module
+ * BarangController implements the CRUD actions for Barang model.
  */
 class BarangController extends Controller
 {
-	public $layout = 'penjual';
+    public $layout = 'penjual';
     /**
      * Renders the index view for the module
      * @return string
      */
+
     public function actionListBarang()
     {
         return $this->render('listbarang');
@@ -26,5 +27,4 @@ class BarangController extends Controller
     {
         return $this->render('editdatabarang');
     }
-    
 }

@@ -9,26 +9,26 @@
       <br/> 
           <tr>
               <td width="200px" height="50px"><label>Nama Barang</label></td>
-              <td width="200px" height="50px"><input type="text" name="namabarang" class="form-control"></td>
+              <td width="200px" height="50px"><input type="text" name="namabarang" class="form-control" id="namabarang"></td>
           </tr>
 
           <tr>
               <td width="200px" height="50px"><label>Jumlah Barang</label></td>
-              <td width="200px" height="50px"><input type="text" name="namabarang" class="form-control"></td>
+              <td width="200px" height="50px"><input type="text" name="stok" class="form-control" id="stok"></td>
           </tr>
 
           <tr>
               <td width="200px" height="50px"><label>Harga</label></td>
-              <td width="200px" height="50px"><input type="text" name="namabarang" class="form-control"></td>
+              <td width="200px" height="50px"><input type="text" name="hargabarang" class="form-control" id="hargabarang"></td>
           </tr>
 
           <tr>
               <td width="200px" height="50px"><label>Deskripsi</label></td>
-              <td width="200px" height="50px"><input type="text" name="namabarang" class="form-control"></td>
+              <td width="200px" height="50px"><input type="text" name="deksripsi" class="form-control" id="deksripsi"></td>
           <tr>
               <td width="200px" height="50px"><label>Upload Barang</label></td>
               <div class="custom-file">
-              <td width="200px" height="50px"><input type="file" name="namabarang" class="custom-file-input"></td>
+              <td width="200px" height="50px"><input type="file" name="gambarbarang" class="custom-file-input" id="gambarbarang"></td>
               </div>
           </tr>
 
