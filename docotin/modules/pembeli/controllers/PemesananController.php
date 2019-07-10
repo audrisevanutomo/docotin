@@ -2,8 +2,14 @@
 
 namespace app\modules\pembeli\controllers;
 
+use Yii;
+use yii\web\UploadedFile;
 use yii\web\Controller;
-
+use app\models\Barang;
+use app\models\Transaksi;
+use app\models\BackedUser;
+use app\modules\admin\models\User;
+use yii\data\ActiveDataProvider;
 /**
  * Default controller for the `pembeli` module
  */
@@ -16,15 +22,23 @@ class PemesananController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $barang_list = Barang::find()->all(); 
+        return $this->render('index',['query' => $barang_list]);
     }
-    public function actionDetail()
+    public function actionDetail($id)
     {
-        return $this->render('detail');
+        $barang = Barang::findOne($id); 
+        $penjual = BackedUser::findOne($barang->id_user);
+        
+        return $this->render('detail',['barang' => $barang, 'penjual' => $penjual]);
+        //return $this->hasOne(Barang::className(), ['id_user' => 
+      //'31']);
+
     }
-    public function actionKeranjang()
+    public function actionKeranjang($id)
     {
-        return $this->render('keranjang');
+        $barang_karanjang = Barang::findOne($id);
+        return $this->render('keranjang',['barang_karanjang' => $barang_karanjang]);
     }
     public function actionDetailData()
     {

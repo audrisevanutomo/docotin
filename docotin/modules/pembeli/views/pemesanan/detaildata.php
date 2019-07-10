@@ -79,12 +79,12 @@
           <div class="panel-total">
           <div class="panel">
             <div class="panel-header">Total Belanja Kamu</div>
-            <p>Mie Indomie Saus Eropa</p>
+            <p>Mie</p>
             <p>Rp 10.000 x 3 = Rp 30.000</p>
-            <p>Mie Indomie Saus Afrika</p>
-            <p>Rp 10.000 x 3 = Rp 30.000</p>
+  <!--           <p>Mie Indomie Saus Afrika</p>
+            <p>Rp 10.000 x 3 = Rp 30.000</p> -->
             <h5 class="total-keseluruhan"> Total Keseluruhan<span id="count"></span></h5>
-            <h5 class="total"> <span id="count">Rp 60.000</span></h5>
+            <h5 class="total"> <span id="count">Rp 30.000</span></h5>
             <br><br>
             
             <!-- Button trigger modal -->

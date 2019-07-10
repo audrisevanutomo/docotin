@@ -1,70 +1,61 @@
+<?php
+// var_dump($model); exit();
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+
+?>
+<style type="text/css">
+	.table tr td{
+		text-align: left;
+	}
+</style>
 <div class="content">
 	<div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<h2 style="text-align: center;">TABEL BARANG</h2>
 		</br>
 		<a href="/penjual/barang/tambah-barang" class="btn btn-primary" style="text-align: left;">Tambah Data</a>
-		<a href="/penjual/barang/edit-barang" class="btn btn-warning" style="text-align: left;">Update Data</a>
-		<button name="btn_tambah" class="btn btn-success" style="text-align: left;">Update Ketersediaan
-		</button>
 		</br>
 		</br>
-		</br>
-			<div class="table-bordered" style="text-align: center;">          
-				<table class="table" style="text-align: center;">
+			<div class="table-bordered">          
+				<table class="table">
 				<thead>
 					<tr class="success">
 						 <th>#</th>
 						 <th>Barang</th>
 						 <th>Nama Barang</th>
 						 <th>Stok</th>
-						 <th>Status</th>
 						 <th>Aksi</th>
 					</tr>
 				</thead>
-
-				<tbody style="text-align: center;">
+				<?php 
+				if(count($query)>0): ?>
+				<?php foreach ($query as $queryy): ?> 
+				<tbody>
 						 <tr>
-						   <td>1</td>
-						   <td><img src="/images/mie.png" style="width: 70px; height: 70px;"></td>
-						   <td>Mie Indomie</td>
-						   <td><div class="form-group"><input type="email" name="namanama" value="3" class="form-control" id="email" style="width: 80px;"></div></td>
-						   <td><label style="color: green;">Available</label></td>
-						   <td><a href="#" >Detail</a></td>
+						   <td><?php echo $queryy->id_barang; ?></td>
+						   <td style="width: 100px;"><?php echo Html::img($queryy->gambar_barang, ['width' => '100px'])?></td>
+						   <td><?php echo $queryy->nama_barang; ?></td>
+						   <td><?php echo $queryy->stok; ?></td>
+						   <td>
+						   </br>
+						   <?=Html::a('Detail',['detail-barang','id'=>$queryy->id_barang],['class' => 'label label-primary'])?></br></br>
+						   <?=Html::a('Edit',['edit-barang','id'=>$queryy->id_barang],['class' => 'label label-success'])?></br></br>
+						   <?=Html::a('Delete',['detail-barang','id'=>$queryy->id_barang],['class' => 'label label-danger'])?>
+						   </td>
 						 </tr>
-				</tbody>
-				<tbody style="text-align: center;">
-						 <tr>
-						   <td>2</td>
-						   <td><img src="/images/mie.png" style="width: 70px; height: 70px;"></td>
-						   <td>Mie Indomie</td>
-						   <td><div class="form-group"><input type="email" name="namanama" value="3" class="form-control" id="email" style="width: 80px;"></div></td>
-						   <td><label style="color: green;">Available</label></td>
-						   <td><a href="#" >Detail</a></td>
-						 </tr>
-				</tbody>
-				<tbody style="text-align: center;">
-						 <tr>
-						   <td>3</td>
-						   <td><img src="/images/mie.png" style="width: 70px; height: 70px;"></td>
-						   <td>Mie Indomie</td>
-						   <td><div class="form-group"><input type="email" name="namanama" value="3" class="form-control" id="email" style="width: 80px;"></div></td>
-						   <td><label style="color: green;">Available</label></td>
-						   <td><a href="#" >Detail</a></td>
-						 </tr>
-				</tbody>
-				<tbody style="text-align: center;">
-						 <tr>
-						   <td>4</td>
-						   <td><img src="/images/mie.png" style="width: 70px; height: 70px;"></td>
-						   <td>Mie Indomie</td>
-						   <td><div class="form-group"><input type="email" name="namanama" value="0" class="form-control" id="email" style="width: 80px;"></div></td>
-						   <td><label style="color: red;">Habis</label></td>
-						   <td><a href="#" >Detail</a></td>
-						 </tr>
+						<?php endforeach; ?>
+						<?php else: ?>
+							<tr>
+								<td>Tidak ada Data</td>
+							</tr>
+						<?php endif; ?>
 				</tbody>
 				</table>
 			</div>
+
 	</div>
 	</div>
 </div>

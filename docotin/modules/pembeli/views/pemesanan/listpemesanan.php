@@ -19,15 +19,15 @@
 			</tr>
 			<tr>
 				<td>1</td>
-				<td>12367188001</td>
-				<td>Flo Anggita</td>
 				<td>1</td>
-				<td>Rp. 10.000</td>
+				<td>Flo Anggita</td>
+				<td>3</td>
+				<td>Rp. 30.000</td>
 				<td><span class="belum_verif">Belum Verif</span></td>
 				<td><span class="pembayaran">Cash</span></td>
 				<td><a href="/pembeli/pemesanan/detail-pesanan">Detail </a></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>2</td>
 				<td>12367188002</td>
 				<td>Flo Anggita</td>
@@ -56,7 +56,7 @@
 				<td><span class="habis">Habis</span></td>
 				<td><span class= "sukses">Saldo Docotin</span></td>
 				<td><a href="list_pesanan_habis.html">Detail </a></td>
-			</tr>
+			</tr> -->
 		</tbody></table>
 	</div>
     

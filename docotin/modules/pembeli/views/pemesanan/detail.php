@@ -1,33 +1,41 @@
+<?php
+// var_dump($model); exit();
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+
+?>
 <div class="content">
 <!-- <div class="row"> -->
 <!-- <div class="col-md-7"> -->
 <div class="box-keranjang">
   <div class="row">
     <div class="col-md-4">
-      <div class="show-foto" > <img src="/images/mie.png" alt=""></div>
+      <div class="show-foto" ><?php echo Html::img($barang->gambar_barang)?></div>
       <div clss="row">
         <div class="col-md-4">
-            <img src="/images/mie.png" class="list-img" alt="">
+            <?php echo Html::img($barang->gambar_barang,['class'=>'list-img'])?>
         </div>
         <div class="col-md-4">
-            <img src="/images/mie.png" class="list-img" alt="">
+            <?php echo Html::img($barang->gambar_barang,['class'=>'list-img'])?>
         </div>
         <div class="col-md-4">
-            <img src="/images/mie.png" class="list-img" alt="">
+            <?php echo Html::img($barang->gambar_barang,['class'=>'list-img'])?>
         </div>
       </div>
     </div>
     <div class="col-md-8">
-      <h4>Mie Indomie Saus Eropa</h4>
-      <h4>Rp. 10.000</h4>
-      <p>Stock Tersedia 100</p>
+      <h4><?php echo $barang->nama_barang; ?></h4>
+      <h4>Rp. <?php echo $barang->harga_barang; ?></h4>
+      <p>Stock Tersedia <?php echo $barang->stok; ?></p>
       <div>
         <div class="row gap-bottom">
           <div class="col-md-3">
-            penjual
+            Penjual
           </div>
           <div class="col-md-9">
-            pakde decotin
+            <?php echo $penjual->username; ?>
           </div>
         </div>
         <div class="row gap-bottom">
@@ -49,7 +57,9 @@
         <div class="row gap-bottom">
           <div class="col-md-3"></div>
           <div class="col-md-4">
-            <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-primary">Beli</button></a> 
+            <!-- <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-primary">Beli</button></a>  -->
+            <?=Html::a('Beli',['keranjang','id'=>$barang->id_barang],['class'=> 'btn btn-primary'])?>
+            
             <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-success">Masukkan Keranjang</button></a>
           </div>
         </div>

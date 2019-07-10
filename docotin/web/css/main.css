@@ -439,6 +439,7 @@ span.status {
 
 .table tr td {
   text-align: center; }
+  
 .login-form{
   display: flex;
   justify-content: center;
