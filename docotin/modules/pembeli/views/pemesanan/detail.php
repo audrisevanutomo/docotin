@@ -43,7 +43,7 @@ use yii\data\ActiveDataProvider;
             Jumlah beli
           </div>
           <div class="col-md-3">
-            <input type="number" class="form-control" name="jumlahBeli" id="jumlahBeli" min="0" onkeyup="manage(this)">
+            <input type="number" class="form-control" name="jumlahBeli" id="jumlahBeli" min="1" onkeyup="manage(this)">
           </div>
         </div>
         <div class="row gap-bottom">
@@ -61,7 +61,7 @@ use yii\data\ActiveDataProvider;
           <?= Html::a('Beli',['keranjang','id'=>$barang->id_barang],['class'=> 'btn btn-primary', 'name'=>'btnBeli', 'id'=>'btnBeli']); ?>
 
             
-            <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-success">Masukkan Keranjang</button></a>
+            <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-success" id="btnKeranjang">Masukkan Keranjang</button></a>
           </div>
         </div>
       </div>
@@ -122,12 +122,23 @@ use yii\data\ActiveDataProvider;
 <!-- </div> -->
 <!-- </div> -->
 <script>
-  function manage(jumlahBeli) {
-    var bt = document.getElementById('btnBeli');
-    if (jumlahBeli.value > <?php echo $barang->stok ?>) {
+  var bt = document.getElementById('btnBeli');
+  var btKeranjang = document.getElementById('btnKeranjang');
+    if (<?php echo $barang->stok ?> == 0) {
       bt.setAttribute("disabled", "disabled");
+      btKeranjang.setAttribute("disabled", "disabled");
     } else {
       bt.removeAttribute("disabled");
+      btKeranjang.removeAttribute("disabled");
     }
-  }
-  </script>
+
+  function manage(jumlahBeli) {
+    if (jumlahBeli.value > <?php echo $barang->stok ?>) {
+      bt.setAttribute("disabled", "disabled");
+      btKeranjang.setAttribute("disabled", "disabled");
+    } else {
+      bt.removeAttribute("disabled");
+      btKeranjang.removeAttribute("disabled");
+    }  
+    }
+</script>
