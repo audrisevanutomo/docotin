@@ -149,8 +149,9 @@ use yii\data\ActiveDataProvider;
       btKeranjang.removeAttribute("disabled");
     }
 
+
   function manage(jumlahBeli) {
-    if (jumlahBeli.value > <?php echo $barang->stok ?>) {
+    if (jumlahBeli.value > <?php echo $barang->stok ?> || jumlahBeli.value == "") {
       btBeli.setAttribute("disabled", "disabled");
       btKeranjang.setAttribute("disabled", "disabled");
       validation.style.display='block';
