@@ -43,7 +43,17 @@ use yii\data\ActiveDataProvider;
             Jumlah beli
           </div>
           <div class="col-md-3">
-            <input type="number" class="form-control">
+            <input type="text" 
+              class="form-control" 
+              name="jumlahBeli" 
+              id="jumlahBeli" 
+              min="1" 
+              onkeyup="manage(this)" 
+              maxlength="3"
+              onkeypress='return 
+              event.charCode >= 48 && event.charCode <= 57'>
+            <span class="text-danger" id="validation" style="font-size:12; display:none;">Jumlah beli harus sesuai stok yang tersedia!</span>
+            <span class="text-danger" id="validation2" style="font-size:12; display:none;">Stok tidak tersedia.</span>
           </div>
         </div>
         <div class="row gap-bottom">
@@ -57,10 +67,11 @@ use yii\data\ActiveDataProvider;
         <div class="row gap-bottom">
           <div class="col-md-3"></div>
           <div class="col-md-4">
-            <!-- <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-primary">Beli</button></a>  -->
-            <?=Html::a('Beli',['keranjang','id'=>$barang->id_barang],['class'=> 'btn btn-primary'])?>
+          
+          <?= Html::a('Beli',['keranjang','id'=>$barang->id_barang],['class'=> 'btn btn-primary', 'name'=>'btnBeli', 'id'=>'btnBeli']); ?>
+
             
-            <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-success">Masukkan Keranjang</button></a>
+            <a href="/pembeli/pemesanan/keranjang"><button type="button" class="btn btn-success" id="btnKeranjang">Masukkan Keranjang</button></a>
           </div>
         </div>
       </div>
@@ -120,3 +131,29 @@ use yii\data\ActiveDataProvider;
 </div>
 <!-- </div> -->
 <!-- </div> -->
+<script>
+  var bt = document.getElementById('btnBeli');
+  var btKeranjang = document.getElementById('btnKeranjang');
+  var validation = document.getElementById('validation');
+
+    if (<?php echo $barang->stok ?> == 0) {
+      bt.setAttribute("disabled", "disabled");
+      btKeranjang.setAttribute("disabled", "disabled");
+      validation2.style.display='block';
+    } else {
+      bt.removeAttribute("disabled");
+      btKeranjang.removeAttribute("disabled");
+    }
+
+  function manage(jumlahBeli) {
+    if (jumlahBeli.value > <?php echo $barang->stok ?>) {
+      bt.setAttribute("disabled", "disabled");
+      btKeranjang.setAttribute("disabled", "disabled");
+      validation.style.display='block';
+    } else {
+      bt.removeAttribute("disabled");
+      btKeranjang.removeAttribute("disabled");
+      validation.style.display='none';
+    }  
+    }
+</script>
