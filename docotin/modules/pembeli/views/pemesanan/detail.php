@@ -61,7 +61,7 @@ use yii\data\ActiveDataProvider;
             Catatan Barang
           </div>
           <div class="col-md-4">
-            <textarea class="form-control" placeholder="Catatan untuk Penjual"></textarea>
+            <textarea class="form-control" id="catatan" placeholder="Catatan untuk Penjual"></textarea>
           </div>
         </div>
         <div class="row gap-bottom">
@@ -132,26 +132,30 @@ use yii\data\ActiveDataProvider;
 <!-- </div> -->
 <!-- </div> -->
 <script>
-  var bt = document.getElementById('btnBeli');
+  var btBeli = document.getElementById('btnBeli');
   var btKeranjang = document.getElementById('btnKeranjang');
   var validation = document.getElementById('validation');
+  var jumlahBeli = document.getElementById('jumlahBeli');
+  var catatan = document.getElementById('catatan');
 
     if (<?php echo $barang->stok ?> == 0) {
-      bt.setAttribute("disabled", "disabled");
+      btBeli.setAttribute("disabled", "disabled");
       btKeranjang.setAttribute("disabled", "disabled");
+      jumlahBeli.setAttribute("disabled", "disabled");
+      catatan.setAttribute("disabled", "disabled");
       validation2.style.display='block';
     } else {
-      bt.removeAttribute("disabled");
+      btBeli.removeAttribute("disabled");
       btKeranjang.removeAttribute("disabled");
     }
 
   function manage(jumlahBeli) {
     if (jumlahBeli.value > <?php echo $barang->stok ?>) {
-      bt.setAttribute("disabled", "disabled");
+      btBeli.setAttribute("disabled", "disabled");
       btKeranjang.setAttribute("disabled", "disabled");
       validation.style.display='block';
     } else {
-      bt.removeAttribute("disabled");
+      btBeli.removeAttribute("disabled");
       btKeranjang.removeAttribute("disabled");
       validation.style.display='none';
     }  
