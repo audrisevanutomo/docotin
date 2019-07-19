@@ -50,8 +50,7 @@ use yii\data\ActiveDataProvider;
               min="1" 
               onkeyup="manage(this)" 
               maxlength="3"
-              onkeypress='return 
-              event.charCode >= 48 && event.charCode <= 57'>
+              onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
             <span class="text-danger" id="validation" style="font-size:12; display:none;">Jumlah beli harus sesuai stok yang tersedia!</span>
             <span class="text-danger" id="validation2" style="font-size:12; display:none;">Stok tidak tersedia.</span>
           </div>
