@@ -66,6 +66,12 @@ $this->title = 'Register';
 										</div></h5></td>
 									</tr>
 
+										<tr>
+										<td><h5> 
+										<div class="register"><?= $form->field($model,'nama_lengkap');?>
+										</div></h5></td>
+									</tr>
+
 									<tr>
 										<td><h5> 
 										<div class="register">
