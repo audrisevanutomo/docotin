@@ -44,6 +44,12 @@ class Grup extends \yii\db\ActiveRecord
     }
 
     public function getBackedUser(){
-    return $this->hasOne(BackedUser::className(),['id_user'=>'id']);
-}
+    return $this->hasOne(BackedUser::className(),['id_grup'=>'id']);
+    
+    }
+
+    public function getStatus(){
+        return $this->hasOne(Status::className(),['status_topup'=>'id_status'])
+    }
+
 }

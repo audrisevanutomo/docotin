@@ -16,8 +16,11 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
+    public $id_grup;
+    // public $id_user;
     public $rememberMe = true;
 
+    private $_grup = false;
     private $_user = false;
 
 
@@ -47,7 +50,7 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
+            // $user = $this->getGrup();
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
                 return false;
@@ -78,7 +81,13 @@ class LoginForm extends Model
         if ($this->_user === false) {
             $this->_user = BackedUser::findByUsername($this->username);
         }
-
         return $this->_user;
+    }
+
+    public function getGrup(){
+        if($this->_grup === false){
+           $this->_grup = BackedUser::findByGrup($this->id_grup);
+        } 
+        return $this->_grup;
     }
 }

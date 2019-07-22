@@ -19,7 +19,7 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     // private $username;
     // private $password;
     // private $email;
-    private $auth_key;
+    // private $auth_key;
     // private $id_grup;
     // private $token;
     /**
@@ -36,8 +36,10 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     public function rules()
     {
         return [
-            [['username', 'email','password','id_grup'], 'required'],
+            [['username', 'email','password','id_grup','no_hp','lantai','nama_lengkap'], 'required'],
             [['username', 'email'], 'string', 'max' => 225],
+            [['lantai','no_hp'],'integer'],
+            [['lantai'],'integer','max'=>6,'message'=>'SAMPE 6 DOANG BOSQ']
         ];
     }
 
@@ -56,6 +58,10 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
 
     public static function findByUsername($username){
         return self::findOne(['username'=>$username]);
+    }
+
+    public static function findByGrup($id_grup){
+        return self::findOne(['id_grup'=>$id_grup]);
     }
 
     public function getId(){
@@ -96,14 +102,23 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
             'username' => 'Username',
             'password' => 'Password',
             'email' => 'Email',
+            'no_hp' =>'Phone Number',
+            'lantai' =>'Floor',
+            'id_grup'=>' '
         ];
     }
 
-    public function getGrup(){
-    return $this->hasOne(Grup::className(),['id'=>'id_grup']);
+
+    public function getDisplay(){
+        return $this->nama_lengkap;
     }
 
-    public function getAtt(){
-        return "ADADASDADA";
+    public function getGrup(){
+        return $this->hasOne(Grup::className(),['id'=>'id_grup']);
     }
+
+    public function getTransaksi(){
+        return $this->hasOne(Transaksi::className(),['id_user'=>'id_user']);
+    }
+
 }
