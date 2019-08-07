@@ -430,6 +430,7 @@ span.status {
   padding-left: 30px; }
 
 .panel > .panel-body {
+  align-content: center;
   padding-left: 60px; }
 
 .table tr td {
@@ -499,6 +500,7 @@ nav.navbar {
     height: 100%; }
 
 .custom-table tr td {
+  align-content: center;
   padding: 6px 10px; }
 
 .jumlah {
