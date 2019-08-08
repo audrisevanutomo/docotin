@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use app\models\Transaksi;
 use yii\web\Controller;
 use app\models\BackedUser;
@@ -9,18 +11,20 @@ use app\models\BackedUser;
 class TransaksiController extends \yii\web\Controller
 {
         
+    
+        
     //ini fungsi buat nampilin yang kalo diganti namanya ntar bakal error
-	public function actionCreate(){
-		// $view= Saldo::findOne($id);
-		$model = BackedUser::findOne(Yii::$app->user->getId());
+    public function actionCreate(){
+        // $view= Saldo::findOne($id);
+        $model = BackedUser::findOne(Yii::$app->user->getId());
         // $bank = Bank::findAll()
         // if ($model->load(Yii::$app->request->post())){
-        // 	if($model->save()){
-        // 	Yii::$app->getSession()->setFlash('message','BERHASIL ISI SALDO:(');
-        // 	 return $this->redirect(['site/index']);	
-        // 	}else{
-        // 		Yii::$app->getSession()->setFlash('message','GAGAL ISI SALDO:(');
-        // 	}
+        //  if($model->save()){
+        //  Yii::$app->getSession()->setFlash('message','BERHASIL ISI SALDO:(');
+        //   return $this->redirect(['site/index']);    
+        //  }else{
+        //      Yii::$app->getSession()->setFlash('message','GAGAL ISI SALDO:(');
+        //  }
         // }
         return $this->render('create', ['model' => $model]);
         }
@@ -83,4 +87,3 @@ class TransaksiController extends \yii\web\Controller
         //     $this->render('create', array('data'=>$data));
         // }
 }
-    

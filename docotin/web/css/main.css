@@ -62,7 +62,7 @@ h1 {
   text-align: center;
   text-shadow: 5px 0 2px white; }
 
-.container {
+/*.container {
   width: 600px;
   background-color: white;
   margin: auto;
@@ -70,7 +70,7 @@ h1 {
   -webkit-box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
           box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.3);
   border-radius: 5px; }
-
+*/
 .gallery li {
   width: 120px;
   height: 126px;
@@ -176,7 +176,7 @@ h1 {
           animation: fadeAjah .5s .5s forwards; }
 
 /* navigasi */
-.next, .prev {
+/*.next, .prev {
   width: 57px;
   height: 57px;
   background-image: url(../img/next.png);
@@ -188,7 +188,7 @@ h1 {
 .prev {
   background-image: url(../img/prev.png);
   margin-left: -100px; }
-
+*/
 /* animasi */
 @-webkit-keyframes fadeAjah {
   0% {
@@ -239,7 +239,7 @@ h1 {
 
 /*navbar*/
 body {
-  background-color: pink; }
+  background-color: white; }
 
 .navbar {
   z-index: 9; }
@@ -439,8 +439,8 @@ span.status {
 
 .table tr td {
   text-align: center; }
-  
 .login-form{
+  text-align: center;
   display: flex;
   justify-content: center;
   flex-direction: column;

@@ -49,7 +49,7 @@ class Grup extends \yii\db\ActiveRecord
     }
 
     public function getStatus(){
-        return $this->hasOne(Status::className(),['status_topup'=>'id_status'])
+        return $this->hasOne(Status::className(),['status_topup'=>'id_status']);
     }
 
 }

@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\helpers\Url;
 
 class SiteController extends Controller
 {
@@ -61,12 +62,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
+         if (Yii::$app->user->isGuest) {
             return $this->redirect('?r=site%2Flogin');
         }
         return $this->render('index');
     }
-
 
     /**
      * Login action.
@@ -75,15 +75,21 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post()) && $model->login()){
+            $model->id_grup = Yii::$app->user->identity->id_grup;
+            // $model->id_user = Yii::$app->user->identity->id_user;
+            if(Yii::$app->user->identity->id_grup==3){
+                // var_dump($model);exit;
+                // return $this->redirect(Url::to(['admin/list','id'=>$model->id_user]));
+                return $this->redirect(['admin/list']);
+            }
+            else{
+                  // var_dump($model);exit;
+            return $this->redirect('?r=site%2Findex'); 
+            }
         }
-
+    
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
@@ -128,9 +134,5 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
-    }
-     public function actionKeranjang()
-    {
-        return $this->render('keranjang');
     }
 }

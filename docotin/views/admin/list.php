@@ -28,7 +28,8 @@ $this->title = 'LIST VA';
 		</div>
 		
 		<table class="table table-bordered">
-			
+			<?php //($searchModel);exit; ?>
+			<?= $this->render('_search',['model'=>$searchModel]); ?>
 			<tbody><tr class="success">
 				<td>No VA</td>
 				<td>Jenis</td>
@@ -48,12 +49,14 @@ $this->title = 'LIST VA';
 			</tr>
 
 			<?php endforeach ; ?>
-			<?= LinkPager::widget([
-			'pagination' => $pages,
-			]); ?>
+			<?php //var_dump($pages);exit; ?>
 		    <?php endif; ?>
 		</tbody>
 	</table>
+			<?= LinkPager::widget([
+			'pagination' => $pages,
+			//'nextPageLabel'=> 'next',
+			]); ?>
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -63,5 +66,4 @@ $this->title = 'LIST VA';
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="../scripts/main.js"></script>	
 </body>
-
 </html>

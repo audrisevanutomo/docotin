@@ -39,10 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="panel">
                 <div class="panel-heading">LOGIN</div>
                 <div class="panel-body">
-                    <form class="form-horizontal">
                         <div class="login-form">
                             <table class="custom-table">
-                                <tbody>
+                                <tbody align="center">
                                     <tr class="success">
                                         <td><h5> <?= $form->field($model, 'username')->textInput() ?>
                                                     <?php $option = ['class'=>'form-control'];
@@ -53,27 +52,26 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <tr class="success">
                                         <td><h5> <?= $form->field($model, 'password')->passwordInput() ?>
                                                 <?php $option = ['class'=>'form-control'];
-                                                 echo Html::addCssStyle($option,'form-cotrol');
+                                                 echo Html::addCssStyle($option,'form-control');
                                                  ?>
                                         </h5></td>
                                     </tr>
                                     <tr>
                                         <td type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                         <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                                        </td>
-                                        <td type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        
+                                        <type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                         <?=Html::a('Register',['/user/register'],['class'=>'btn btn-primary'])
                                         ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td></td>
+
                                         <td><a href="">Forget Password ?</a></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
