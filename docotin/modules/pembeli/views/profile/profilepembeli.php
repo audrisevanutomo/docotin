@@ -1,3 +1,16 @@
+<?php
+// var_dump($model); exit();
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+
+?>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
 <div class="modal fade" id="top_up" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -55,11 +68,11 @@
 								<tbody>
 									<tr class="success">
                     <td><h5> <div class="register">Username</h5></td></div>
-                    <td><h5> <div class="register">Floanggita</h5></td></div>
+                    <td><h5> <div class="register"><?php echo $user->username; ?></h5></td></div>
 									</tr>
 									<tr>
                     <td><h5> <div class="register">Email</h5></td></div>
-                    <td><h5> <div class="register">Floanggita@docotel.com</h5></td></div>
+                    <td><h5> <div class="register"><?php echo $user->email; ?></h5></td></div>
 									</tr>
 									<tr>
                     <td><h5> <div class="register">Password</h5></td></div>
@@ -87,7 +100,6 @@
         <div class="panel-body">
             <div class="panel">
               <div class="panel-body">
-                <form class="form-horizontal">
                   <div class="login-form">
                   <div class= "saldo-btn">
                     <!-- Button trigger modal -->
@@ -103,6 +115,21 @@
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#top_up">Rp.100.000</button>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#top_up">Rp. 150.000</button>
                       </div>
+
+                      
+                      <?php if(Yii::$app->session->hasFlash('success')): ?>
+                        <div class="alert alert-success" style="width:50%; height:50px">
+                          <?= Yii::$app->session->getFlash('success') ?>
+                        </div>
+                      
+                      <?php endif; ?>
+
+                      <?php $form = ActiveForm::begin([
+                        'enableClientValidation' => false],
+                        ['options' => [
+                          'method' => 'post',
+                          'enctype' => 'multipart/form-data']]);
+                        ?>
                     <table class="custom-table">
                       <tbody>
                         <div class= "form-biodata">
@@ -112,36 +139,62 @@
                         </tr>
                         <tr>
                           <td><h5> <div class="register">Nama Lengkap</h5></td></div>
-                          <td><input type="text" class="form-control" id="inputEmail3"></td>
+                          <td>
+                          <?= Html::activeTextInput($model, 'nama_lengkap', ['class' => 'form-control']);?>
+                          <?= Html::error($model, 'nama_lengkap'); ?>
+                          </td>
                         </tr>
                         <tr>
                           <td><h5> <div class="register">No HP</h5></td></div>
-                          <td><input type="number" class="form-control" id="inputEmail3"></td>
+                          <td>
+                          <?= Html:: activeTextInput($model, 'no_hp', ['class' => 'form-control']);?>
+                          <?= Html::error($model, 'no_hp'); ?>
+                          </td>
                         </tr>
                         <tr>
-                          <td><h5> <div class="register">lantai</h5></td></div>
-                          <td><h5> <div class="register">7</h5></td></div>
+                          <td><h5> <div class="register">Lantai</h5></td></div>
+                          <td>
+                          <?= Html::activeTextInput($model, 'lantai', ['class' => 'form-control']);?>
+                          <?= Html::error($model, 'lantai'); ?>
+                          </td></div>
                         </tr>
                         <tr>
                           <td><h5> <div class="register">Role</h5></td></div>
-                          <td><h5> <div class="register">Pembeli</h5></td></div>
+                          <td>
+                          <?php 
+                            if($user->id_group == 1) {
+                              echo 'penjual';
+                            } elseif ($user->id_group == 2) {
+                              echo 'pembeli';
+                            } else {
+                              echo 'role tidak terdaftar';
+                            }
+                          ?>
+                          
+                          </td></div>
                         </tr>
                         <tr>
                           <td></td>
                           <td>
-                            <button type="button" class="btn btn-primary">Ubah</button>
-                            <button type="button" class="btn btn-success">Cancel</button>
+                          <div class="form-group">
+                             <?= Html::submitButton('Ubah', ['class' => 'btn btn-success']) ?>
+                            <button type="button" class="btn btn-danger">Cancel</button>
+                            </div>
                           </td>
                         </tr>
                       </div>
                       </tbody>
                     </table>
+                    <?php ActiveForm::end(); ?>
                   </div>
-                </form>
               </div>
             </div>
             </div>
       </div>
     </div>
   </div>
+  <script>
+  var timeout = 3000;
+    $('.alert').delay(timeout).fadeOut(300);
+  </script>
     

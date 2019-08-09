@@ -1,3 +1,11 @@
+<?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <!-- modal content here -->
   <!-- Modal -->
 <div class="modal fade" id="top_up" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -57,11 +65,11 @@
 								<tbody>
 									<tr class="success">
                     <td><h5> <div class="register">Username</h5></td></div>
-                    <td><h5> <div class="register">Floanggita</h5></td></div>
+                    <td><h5> <div class="register"><?php echo $user->username ?></h5></td></div>
 									</tr>
 									<tr>
                     <td><h5> <div class="register">Email</h5></td></div>
-                    <td><h5> <div class="register">Floanggita@docotel.com</h5></td></div>
+                    <td><h5> <div class="register"><?php echo $user->email ?></h5></td></div>
 									</tr>
 									<tr>
                     <td><h5> <div class="register">Password</h5></td></div>
@@ -88,9 +96,16 @@
       <div class="panel-body">
         <div class="panel-body">
             <div class="panel">
-              <div class="panel-body">
-                <form class="form-horizontal">
+              <div class="panel-body">            
                   <div class="login-form">
+                  
+                  <?php $form = ActiveForm::begin([
+                'enableClientValidation' => false],
+                ['options' => [
+                  'method' =>'post',
+                  'enctype' => 'multipart/form-data'
+                ]]);
+                ?>
                   <div class= "saldo-btn">
                           <!-- Button trigger modal -->
                           <a href="/penjual/profile/list-penarikan"><button type="button" class="btn btn-success">
@@ -113,29 +128,57 @@
                               Proses</button>
                           </td>
                         </tr>
+                        <?php if(Yii::$app->session->hasFlash('success')): ?>
+                        <div class="alert alert-success" style="width:100%; height:50px">
+                          <?= Yii::$app->session->getFlash('success') ?>
+                        </div>
+                      
+                      <?php endif; ?>
                         <tr>
                           <td><h5> <div class="register">Saldo</h5></td></div>
                           <td><h5> <div class="register">Rp. 10.000.000</h5></td></div>
                         </tr>
                         <tr>
                           <td><h5> <div class="register">Nama Lengkap</h5></td></div>
-                          <td><input type="text" class="form-control" id="inputEmail3"></td>
+                          <td>
+                          <?= Html::activeTextInput($model, 'namaLengkap', ['class' => 'form-control']);?>
+                          <?= Html::error($model, 'namaLengkap'); ?>
+                          </td>
                         </tr>
                         <tr>
                           <td><h5> <div class="register">No HP</h5></td></div>
-                          <td><input type="number" class="form-control" id="inputEmail3"></td>
+                          <td>
+                          <?= Html::activeTextInput($model, 'noHp', ['class' => 'form-control']);?>
+                          <?= Html::error($model, 'noHp'); ?>
+                          </td>
                         </tr>
                         <tr>
                           <td><h5> <div class="register">Alamat</h5></td></div>
-                          <td><input type="number" class="form-control" id="inputEmail3"></td>
+                          <td>
+                          <?= Html::activeTextInput($model, 'alamat', ['class' => 'form-control']);?>
+                          <?= Html::error($model, 'alamat'); ?>
+                          </td>
                         </tr>
                         <tr>
                           <td><h5> <div class="register">No NPWP</h5></td></div>
-                          <td><input type="number" class="form-control" id="inputEmail3"></td>
+                          <td>
+                          <?= Html::activeTextInput($model, 'noNpwp', ['class' => 'form-control']);?>
+                          <?= Html::error($model, 'noNpwp'); ?>
+                          </td>
                         </tr>
                         <tr>
                           <td><h5> <div class="register">Role</h5></td></div>
-                          <td><h5> <div class="register">Penjual</h5></td></div>
+                          <td>
+                          <?php 
+                          if($user->id_group == 1) {
+                            echo 'Penjual';
+                          } elseif ($user->id_group == 2){
+                            echo 'Pembeli';
+                          } else {
+                            echo 'role tidak terdaftar';
+                          }
+                          ?>
+                          </td></div>
                         </tr>
                         <tr>
                           <td>
@@ -143,7 +186,9 @@
                           </td>
                           <td>
                             <div class="custom-file">
-                            <input type="file" name="namabarang" class="custom-file-input">
+                            <?= $form -> field($model, 'fotoKtp')->fileInput() ?>
+                            <img style="width:20%; height:20%" src="<?php echo Yii::getAlias('@web').'/uploads/'.$model->fotoKtp; ?>">
+                            <?= $model->fotoKtp; ?>
                             </div>
                           </td>
                         </tr>
@@ -151,7 +196,8 @@
                           <td></td>
                           <td>
                             <br/>
-                            <button type="button" class="btn btn-primary">Ubah</button>
+                            <div class = 'form-group'>
+                            <?= Html::submitButton('Ubah', ['class' => 'btn btn-success']) ?>
                             <button type="button" class="btn btn-danger">Cancel</button>
                           </td>
                         </tr>
@@ -159,7 +205,7 @@
                       </tbody>
                     </table>
                   </div>
-                </form>
+                <?php ActiveForm::end(); ?>
               </div>
             </div>
             </div>
@@ -174,6 +220,8 @@
 				$('.top-up').toggle()
         // alert('hallo')
 			});
-				
 		});
+
+  var timeout = 3000;
+    $('.alert').delay(timeout).fadeOut(300);
 	</script>
