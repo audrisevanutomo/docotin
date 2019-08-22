@@ -21,6 +21,7 @@ class Transaksi extends \yii\db\ActiveRecord
                             '2'=>'berhasil',
                             '3'=>'gagal',
                             ]; 
+
     /**
      * {@inheritdoc}
      */
@@ -68,6 +69,7 @@ class Transaksi extends \yii\db\ActiveRecord
             'jumlah_saldo' => 'Jumlah Saldo',
             'tanggal' => 'Tanggal',
             'id_bank' => 'Bank',
+            'id_topup' => 'Id Top-up',
         ];
     }
 
@@ -92,10 +94,6 @@ class Transaksi extends \yii\db\ActiveRecord
                             ->orderBy(['id_topup' => SORT_DESC])
                             ->one();
             return is_null($lastest_id) ? date('Ymd')."0001" : $lastest_id->id_topup;
-    }
-
-    public function scenarios(){
-        return Model::scenarios();
     }
     public function getBackedUser(){
         return $this->hasOne(BackedUser::className(),['id_user'=>'id_user']);

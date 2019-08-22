@@ -25,6 +25,32 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     /**
      * {@inheritdoc}
      */
+
+    const SCENARIO_CREATE = 'scenariocreate';
+    const SCENARIO_UPDATE = 'scenarioupdate';
+    const SCENARIO_BARU = 'scenariobaru';
+
+    public function getCustomScenarios(){
+        return [
+            self::SCENARIO_CREATE => ['username','password','email','no_hp','lantai','saldo'],
+            self::SCENARIO_UPDATE => ['username','password','email','no_hp','lantai','saldo'],
+            self::SCENARIO_BARU   => ['username','password','email','no_hp','lantai','saldo'],
+        ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = $this->getCustomScenarios();
+        return $scenarios;
+    }
+
+    // public function ModifyRequired()
+    // {
+    //   $allscenarios = $this->getCustomScenarios();
+    //   $allscenarios[self::SCENARIO_UPDATE] = array_diff($allscenarios[self::SCENARIO_UPDATE], ['password']);
+    //   return $allscenarios;
+    // }
+
     public static function tableName()
     {
         return 'user';
@@ -89,12 +115,15 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     }
 
     public function beforeSave($insert){
-    if (!parent::beforeSave($insert)) {
-        return false;
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        if($this->scenario != backedUser::SCENARIO_BARU){
+        $this->setAttribute('password',md5($this->password));
+        }
+            return true;
     }
-    $this->setAttribute('password',md5($this->password));
-    return true;
-    }
+    
     public function attributeLabels()
     {
         return [

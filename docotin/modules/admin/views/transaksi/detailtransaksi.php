@@ -1,101 +1,93 @@
-<div class="content">
-		<div class="row">
-			<div class="col-md-7">
-        <div class="card">
-  					<table class="custom-table">
-                <tbody><tr class="success">
-                  <td>Nama Pembeli</td>
-                  <td>:</td>
-                  <td>Flo Anggita</td>
-                </tr>
-                <tr>
-                  <td>Lantai</td>
-                  <td>:</td>
-                  <td>Lantai 7</td>
-                </tr>
-                <tr>
-                  <td>No Handphone</td>
-                  <td>:</td>
-                  <td>0826728832</td>
-                </tr>
-                <tr>
-                  <td>Jenis Pembayaran</td>
-                  <td>:</td>
-                  <td><span class="pembayaran">CASH</span></td>
-                </tr>
-                <tr>
-                  <td>No Transaksi</td>
-                  <td>:</td>
-                  <td>312000001881</td>
-                </tr>
-                <tr>
-                  <td>Status</td>
-                  <td>:</td>
-                  <td><span class="belum_verifikasi">Belum Verifikasi</span></td>
-                </tr>
-                <tr>
-                    <td>Tracking</td>
-                    <td>:</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="circle-process">
-                          <div class="step">1</div>
-                          <div class="desc">Verifikasi</div>
-                        </div>
-                        <div class="circle-process">
-                          <div class="step">2</div>
-                          <div class="desc">Persiapan</div>
-                        </div>
-                        <div class="circle-process">
-                          <div class="step">3</div>
-                          <div class="desc">Diterima</div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>			
-            </tbody></table>
+<?php
+use yii\widgets\ActiveForm;
+use yii\web\Controller;
+use app\models\Transaksi;
+use yii\helpers\html;
+
+$this->title = 'DETAIL TOP UP';
+
+?>
+<html lang="en">
+  <body>
+  <input type="hidden" id="menu" value="detail-va">
+    <div class="sidebar">
+      <ul>
+        <a href="flagging.html"><li data-target="flagging">Flagging</li></a>
+        <a href="transaksi.html"><li data-target="transaksi">Transaksi</li></a>
+        <a href="history_transaksi.html"><li data-target="history_transaksi">History Transaksi</li></a>
+        <a href="user.html"><li data-target="user">User</li></a>
+        <a href="list_va.html"><li data-target="detail-va" class="active">List VA</li></a>
+      </ul>
+    </div>
+  
+  <div class="content">
+    <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+    <div class="panel">
+      <div class="panel-heading">DETAIL VA</div>
+      <div class="bordered-box">
+        <div class="logo">
+          <img src="http://beta.docotel.net/images/logo/docotel-logo.png" alt="" class="doco-logo">
         </div>
-
-				  <div class="row card">
-            <div class="col-md-4">
-              <div class="menu-pics">
-                <img src="/images/mie.png" alt="">
-              </div>
-            </div>
-              <div class="col-md-7">
-                <p> Mie Indomie Saus Eropa</p> 
-                <p>Rp. 10.000</p>               
-                <h5 class="jumlah"> Jumlah Porsi = <span id="count">3</span></h5>                
-              </div>
-          </div>
-
-					<div class="row card">
-            <div class="col-md-4">
-                <div class="menu-pics">
-                  <img src="/images/mie_goreng.png" alt="">
-                </div>
-            </div>
-              <div class="col-md-7">
-                <p> Mie Indomie Saus Afrika</p> 
-                <p>Rp. 10.000</p>
-                <h5 class="jumlah"> Jumlah Porsi = <span id="count">3</span></h5>                
-              </div>
-          </div>
-			</div>
-
-      <div class="col-md-5">
-          <div class="panel-total">
-          <div class="panel">
-              <div class="panel-header">Total Belanja Kamu</div>
-              <p>Mie Indomie Saus Eropa</p>
-              <p>Rp 10.000 x 3 = Rp 30.000</p>
-              <p>Mie Indomie Saus Afrika</p>
-              <p>Rp 10.000 x 3 = Rp 30.000</p>
-              <h5 class="jumlah"> Total Keseluruhan<span id="count"></span></h5>
-              <h5 class="total"> <span id="count">Rp 60.000</span></h5>
-            </div> 
-          </div>
+          <h4>DOCO CAFE DOCOTEL TEKNOLOGI</h4>
+          <h5>TOP UP SALDO</h5>
+            <table class="detail-va centered-table">
+              <tbody><tr class="success">
+                <td>Kode VA Debit</td>
+                <td>:</td>
+                <td><?= $detail->id_topup ?></td>
+              </tr>
+              <tr>
+                <td>Nama Pembeli</td>
+                <td>:</td>
+                <td><?= $model->nama_lengkap ?></td>
+              </tr>
+              <tr>
+                <td>Email Pembeli</td>
+                <td>:</td>
+                <td><?= $model->email ?></td>
+              </tr>
+              <tr>
+                <td>Nomor HP Pembeli</td>
+                <td>:</td>
+                <td><?= $model->no_hp ?></td>
+              </tr>
+              <tr>
+                <td>Tanggal Pemesanan</td>
+                <td>:</td>
+                <td><?= $detail->tanggal ?></td>
+              </tr>
+              <tr>
+                <td>Jumlah Top up</td>
+                <td>:</td>
+                <td><?= $detail->jumlah_saldo ?></td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <td>:</td>
+                <td><span class="saldo-bertambah"><?= $status->status ?></span></td>
+              </tr>
+              <tr>
+                <td colspan="2" id="buton">
+              <?php ActiveForm::begin(['action'=>\yii\helpers\Url::to(['detail','id'=>$detail->id_topup])]); ?>
+                <?= Html::submitButton('Setujui',['class'=>'btn btn-success']) ?>
+              <?php ActiveForm::end()?>
+              </td>
+              <td>
+              <?php ActiveForm::begin(['action'=>\yii\helpers\Url::to(['tolak','id'=>$detail->id_topup])]); ?>      
+                <?= Html::submitButton('Tolak',['class'=>'btn btn-danger']) ?>
+                </td>
+                <?php ActiveForm::end()?>
+              </tr>
+            </tbody></table>
       </div>
-		</div>
-</div>
-   
+        <!-- <a href="list_va.html"><button class="btn btn-primary" type="button">Kembali</button></a> -->
+        <?= Html::a('Kembali', ['list'], ['class'=>'btn btn-primary']) ?>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  </script>
+</body></html>

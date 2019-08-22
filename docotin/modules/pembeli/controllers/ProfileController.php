@@ -38,7 +38,11 @@ class ProfileController extends Controller
             $detailUser = new DetailUser();
             $detailUser->id_user = $id;
             if ($detailUser->saveModel($model, $detailUserAwal)) {
+<<<<<<< HEAD
                 Yii::$app->session->setFlash('success', 'Biodata berhasil diubah.');
+=======
+                Yii::$app->session->setFlash('success', "Biodata berhasil diubah!");
+>>>>>>> update/profile-pembeli
                 return $this->redirect(['profile-pembeli', 'id' => $detailUser->id ]);
         }
         //var_dump($user); exit;

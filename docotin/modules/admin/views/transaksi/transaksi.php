@@ -1,59 +1,69 @@
-<div class="content">
-      <div class="panel">
-          <div class="panel-heading">LIST PEMESANAN</div>
-      </div>
-        
-        <table class="table table-bordered">
-          <tbody><tr class="success">
-            <td>#</td>
-            <td>No Transaksi</td>
-            <td>Pembeli</td>
-            <td>Jumlah Item</td>
-            <td>Total Harga</td>
-            <td>Status</td>
-            <td>Jenis Pembayaran</td>
-            <td>Aksi</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>12367188001</td>
-            <td>Flo Anggita</td>
-            <td>1</td>
-            <td>Rp.10.000</td>
-            <td><span class="belum_verif">Belum Verif</span></td>
-            <td><span class="cash">Cash</span></td>
-            <td><a href="/admin/transaksi/detail-transaksi">Detail </a></td>
-          </tr>
-          <tr>
-              <td>2</td>
-              <td>12367188002</td>
-              <td>Flo Anggita</td>
-              <td>2</td>
-              <td>Rp.60.000</td>
-              <td><span class="proses">Proses</span></td>
-              <td><span class="saldo_docotin">Saldo Docotin</span></td>
-							<td><a href="detail_transaksi_proses.html">Detail </a></td>
-          </tr>
-          <tr>
-              <td>3</td>
-              <td>12367188003</td>
-              <td>Flo Anggita</td>
-              <td>2</td>
-              <td>Rp.60.000</td>
-              <td><span class="sukses">Sukses</span></td>
-              <td><span class="saldo_docotin">Saldo Docotin</span></td>
-							<td><a href="detail_transaksi.html">Detail </a></td>
-          </tr>
-          <tr>
-              <td>4</td>
-              <td>12367188004</td>
-              <td>Flo Anggita</td>
-              <td>2</td>
-              <td>Rp.60.000</td>
-              <td><span class="habis">Habis</span></td>
-              <td><span class="saldo_docotin">Saldo Docotin</span></td>
-							<td><a href="detail_transaksi_habis.html">Detail </a></td>
-          </tr>
+<?php
 
-        </tbody></table>
-</div>
+use yii\widgets\ActiveForm;
+use yii\web\Controller;
+use yii\helpers\html;
+use yii\widgets\LinkPager;
+$this->title = 'LIST VA';
+
+?>
+
+<html lang="en"><head>
+  </head>
+  <body>
+  <input type="hidden" id="menu" value="detail-va">
+    <div class="sidebar">
+      <ul>
+        <a href="flagging.html"><li data-target="flagging"><?= Html::a('Flagging',['flagging']) ?></li></a>
+        <a href="transaksi.html"><li data-target="transaksi">Transaksi</li></a>
+        <a href="history_transaksi.html"><li data-target="history_transaksi">History Transaksi</li></a>
+        <a href="user.html"><li data-target="user">User</li></a>
+        <a href="list_va.html"><li data-target="detail-va" class="active">List VA</li></a>
+      </ul>
+    </div>
+  
+  <div class="content">
+    <div class="panel">
+      <div class="panel-heading">TABEL FLAGGING</div>
+    </div>
+    
+    <table class="table table-bordered">
+      <?php //($searchModel);exit; ?>
+      <?= $this->render('_search',['model'=>$searchModel]); ?>
+      <tbody><tr class="success">
+        <td>No VA</td>
+        <td>Jenis</td>
+        <td>Pengguna</td>
+        <td>Status</td>
+        <td>Aksi</td>
+      </tr>
+      <?php if(count($models ) > 0): ?>
+        <?php foreach($models as $model):?>
+      <tr>
+        <td><?= $model->id_topup ?></td>
+        <td>top-up</td>
+        <td><?= $model->backedUser->nama_lengkap ?></td>
+        <td><?= $model->statusName ?></td>
+        <td><?=Html::a('detail',['detail','id'=>$model->id_topup])?></td>
+
+      </tr>
+
+      <?php endforeach ; ?>
+      <?php //var_dump($pages);exit; ?>
+        <?php endif; ?>
+    </tbody>
+  </table>
+      <?= LinkPager::widget([
+      'pagination' => $pages,
+      //'nextPageLabel'=> 'next',
+      ]); ?>
+  </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../scripts/main.js"></script>  
+</body>
+</html>
