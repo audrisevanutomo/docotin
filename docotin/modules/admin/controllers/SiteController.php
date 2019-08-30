@@ -82,7 +82,7 @@ class SiteController extends Controller
             if(Yii::$app->user->identity->id_grup==3){
                 // var_dump($model);exit;
                 // return $this->redirect(Url::to(['admin/list','id'=>$model->id_user]));
-                return $this->redirect(['admin/list']);
+                return $this->redirect(['transaksi/transaksi']);
             }
             if(Yii::$app->user->identity->id_grup==1){
                 return $this->redirect(['penjual/index']);
