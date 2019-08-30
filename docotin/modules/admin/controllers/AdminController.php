@@ -1,7 +1,5 @@
 <?php
-
 namespace app\controllers;
-
 use yii;
     use yii\web\Controller;
     use app\models\LoginForm;
@@ -11,27 +9,22 @@ use yii;
     use yii\data\Pagination;
     use yii\data\Sort;
     use yii\db\ActiveQuery;
-
 class AdminController extends \yii\web\Controller
 {
     public function actionIndex()
     {
         return $this->render('index');
     }
-
         public function actionList(){
-
             if(Yii::$app->user->isGuest){
                 return $this->redirect(['site/login']);
             }
             if(Yii::$app->user->identity->id_grup==2){
                 return $this->redirect(['site/index']);
             }
-
             if(Yii::$app->user->identity->id_grup==1){
                 return $this->redirect(['site/index']);
             }
-
             $sort = new sort([
                 'attributes'=>[
                     'status_topup'=>[
@@ -70,7 +63,6 @@ class AdminController extends \yii\web\Controller
                 ->offset($pages->offset)
                 ->limit($pages->limit)
                 ->all();
-
             $searchModel = new Search();
             //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             // var_dump($list[0]->backedUser);exit;
@@ -83,14 +75,12 @@ class AdminController extends \yii\web\Controller
                 'list'=>$list,
             ]);
         } 
-
         public function actionSearch(){
             $searchModel = Search::find()
                     ->where(['id_topup'=>Yii::$app->request->queryParams]);
             return $this->render('list',['searchModel'=>$searchModel]);
             //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         }
-
         public function actionDetail($id){
             $ee = new Transaksi();  
             $detail = Transaksi::findOne($id);
@@ -107,7 +97,6 @@ class AdminController extends \yii\web\Controller
                     }
             return $this->render('transaksi/detailtransaksi',['detail'=>$detail,'model'=>$model,'status'=>$status]);
         }
-
         public function actionTolak($id){
             $model = Transaksi::findOne($id);
             $post = Yii::$app->request->post();
@@ -118,4 +107,3 @@ class AdminController extends \yii\web\Controller
                 }
         }
 }
-  

@@ -30,17 +30,18 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     const SCENARIO_UPDATE = 'scenarioupdate';
     const SCENARIO_BARU = 'scenariobaru';
 
-    public function getCustomScenarios(){
-        return [
-            self::SCENARIO_CREATE => ['username','password','email','no_hp','lantai','saldo'],
-            self::SCENARIO_UPDATE => ['username','password','email','no_hp','lantai','saldo'],
-            self::SCENARIO_BARU   => ['username','password','email','no_hp','lantai','saldo'],
-        ];
-    }
+    // public function getCustomScenarios(){
+    //     return [
+    //         self::SCENARIO_CREATE => ['username','password','email','no_hp','lantai','saldo'],
+    //         self::SCENARIO_UPDATE => ['username','password','email','no_hp','lantai','saldo'],
+    //         self::SCENARIO_BARU   => ['username','password','email','no_hp','lantai','saldo'],
+    //     ];
+    // }
 
     public function scenarios()
     {
-        $scenarios = $this->getCustomScenarios();
+        $scenarios = parent::scenarios();
+        $scenarios['scenarioupdate'] = ['username','password'];
         return $scenarios;
     }
 
@@ -118,7 +119,7 @@ class backedUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
         if (!parent::beforeSave($insert)) {
             return false;
         }
-        if($this->scenario != backedUser::SCENARIO_BARU){
+        if($this->scenario != backedUser::SCENARIO_UPDATE){
         $this->setAttribute('password',md5($this->password));
         }
             return true;
