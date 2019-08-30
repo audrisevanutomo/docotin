@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2019 at 06:07 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: Aug 30, 2019 at 11:24 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,26 +25,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
+-- Table structure for table `bank`
 --
 
-CREATE TABLE `barang` (
-  `id_barang` int(11) NOT NULL,
-  `nama_barang` varchar(100) NOT NULL,
-  `harga_barang` int(20) NOT NULL,
-  `gambar_barang` text NOT NULL,
-  `stok` int(10) NOT NULL,
-  `deksripsi` text NOT NULL,
-  `id_user` int(11) NOT NULL
+CREATE TABLE `bank` (
+  `id_bank` int(11) NOT NULL,
+  `nama_bank` varchar(225) NOT NULL,
+  `kode_bank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang`
+-- Dumping data for table `bank`
 --
 
-INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_barang`, `gambar_barang`, `stok`, `deksripsi`, `id_user`) VALUES
-(4, 'Mie', 10000, '/uploads/barang/mie.jpg', 1, 'Barang Bagus nih', 31),
-(5, 'Kebab', 10000, '/uploads/barang/Resep-Kebab.jpg', 1, 'Kebab Hangat dapat di Simpan di Microwave', 31);
+INSERT INTO `bank` (`id_bank`, `nama_bank`, `kode_bank`) VALUES
+(1, 'BNI', 25),
+(2, 'BRI', 26),
+(3, 'MANDIRI', 27);
 
 -- --------------------------------------------------------
 
@@ -63,19 +60,29 @@ CREATE TABLE `grup` (
 
 INSERT INTO `grup` (`id_grup`, `nama_grup`) VALUES
 (1, 'penjual\r\n'),
-(2, 'pembeli');
+(2, 'pembeli'),
+(3, 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `saldo`
+-- Table structure for table `status`
 --
 
-CREATE TABLE `saldo` (
-  `id_saldo` int(11) NOT NULL,
-  `JumlahSaldoPertama` int(11) NOT NULL,
-  `JumlahSaldoUpdate` int(11) NOT NULL
+CREATE TABLE `status` (
+  `id_status` int(11) NOT NULL,
+  `status` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id_status`, `status`) VALUES
+(0, 'belum di proses'),
+(1, 'tertunda'),
+(2, 'berhasil'),
+(3, 'gagal');
 
 -- --------------------------------------------------------
 
@@ -84,12 +91,22 @@ CREATE TABLE `saldo` (
 --
 
 CREATE TABLE `transaksi` (
-  `id_transaksi` int(11) NOT NULL,
-  `status_bayar` varchar(50) NOT NULL,
-  `tanggal_bayar` date NOT NULL,
-  `tanggal_transaksi` date NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_topup` double NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `jumlah_saldo` int(225) NOT NULL,
+  `status_topup` int(1) NOT NULL DEFAULT '0' COMMENT '0=belum di proses, 1=tertunda, 2=berhasil, 3=gagal',
+  `tanggal` datetime DEFAULT CURRENT_TIMESTAMP,
+  `id_bank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_topup`, `id_user`, `jumlah_saldo`, `status_topup`, `tanggal`, `id_bank`) VALUES
+(201908280021, 47, 150000, 2, '2019-08-28 12:46:27', 3),
+(201908290004, 51, 100000, 2, '2019-08-29 11:18:37', 1),
+(201908300004, 51, 100000, 2, '2019-08-30 14:56:00', 2);
 
 -- --------------------------------------------------------
 
@@ -101,33 +118,47 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `id_grup` int(11) NOT NULL,
   `username` varchar(225) NOT NULL,
+  `nama_lengkap` varchar(60) NOT NULL,
   `password` varchar(225) NOT NULL,
-  `email` varchar(225) NOT NULL
+  `email` varchar(225) NOT NULL,
+  `no_hp` double NOT NULL,
+  `lantai` int(11) DEFAULT NULL,
+  `saldo` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `id_grup`, `username`, `password`, `email`) VALUES
-(9, 2, 'yoga', 'd41d8cd98f00b204e9800998ecf8427e', 'yoga@xmail.com'),
-(16, 0, 'irky', 'd41d8cd98f00b204e9800998ecf8427e', 'irky@xmail.com'),
-(27, 0, 'bambang', 'd41d8cd98f00b204e9800998ecf8427e', 'bambang@xmail.com'),
-(28, 0, 'ilham', 'b63d204bf086017e34d8bd27ab969f28', 'ilham@xmail.com'),
-(29, 0, 'agus', 'fdf169558242ee051cca1479770ebac3', 'agus@xmail.com'),
-(30, 0, 'riski', '6e24184c9f8092a67bcd413cbcf598da', 'riski@xmail.com'),
-(31, 2, 'asdf', '912ec803b2ce49e4a541068d495ab570', 'asdf@xmail.com');
+INSERT INTO `user` (`id_user`, `id_grup`, `username`, `nama_lengkap`, `password`, `email`, `no_hp`, `lantai`, `saldo`) VALUES
+(39, 3, 'admin', 'admin clr cff', '21232f297a57a5a743894a0e4a801fc3', 'admin@xmail.com', 82251252772, 4, 0),
+(40, 1, 'aldi', 'aldi', '5cf15fc7e77e85f5d525727358c0ffc9', 'aldi@xmail.com', 82251252772, 3, 0),
+(43, 2, 'bambang', 'bambang a', '8672aa5c7a99f955f87426063b0481aa', 'bambang@xmail.com', 82251252772, 3, 0),
+(47, 2, 'agus', 'agus aja', '80748430dea0437a37e1760874e3f85e', 'agus@xmail.com', 82251252772, 3, 2400000),
+(51, 2, 'rr', 'rr', '514f1b439f404f86f77090fa9edc96ce', 'rr@xmail.com', 82251252772, 3, 400000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `va`
+--
+
+CREATE TABLE `va` (
+  `id_va` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_bank` int(11) NOT NULL,
+  `nomer_va` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `barang`
+-- Indexes for table `bank`
 --
-ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id_barang`),
-  ADD KEY `id_user` (`id_user`);
+ALTER TABLE `bank`
+  ADD PRIMARY KEY (`id_bank`);
 
 --
 -- Indexes for table `grup`
@@ -136,16 +167,10 @@ ALTER TABLE `grup`
   ADD PRIMARY KEY (`id_grup`);
 
 --
--- Indexes for table `saldo`
---
-ALTER TABLE `saldo`
-  ADD PRIMARY KEY (`id_saldo`);
-
---
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`id_transaksi`);
+  ADD PRIMARY KEY (`id_topup`);
 
 --
 -- Indexes for table `user`
@@ -154,43 +179,38 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
+-- Indexes for table `va`
+--
+ALTER TABLE `va`
+  ADD PRIMARY KEY (`id_va`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `barang`
+-- AUTO_INCREMENT for table `bank`
 --
-ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `bank`
+  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
-  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `saldo`
---
-ALTER TABLE `saldo`
-  MODIFY `id_saldo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `transaksi`
---
-ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
---
--- Constraints for dumped tables
---
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- Constraints for table `barang`
+-- AUTO_INCREMENT for table `va`
 --
-ALTER TABLE `barang`
-  ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `va`
+  MODIFY `id_va` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
